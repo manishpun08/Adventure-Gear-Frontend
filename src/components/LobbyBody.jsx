@@ -11,7 +11,10 @@ import NoRecruit from "./NoRecruit";
 import Loader from "./Loader";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { openErrorSnackbar } from "../store/slices/snackbarSlice";
+import {
+  openErrorSnackbar,
+  openSuccessSnackbar,
+} from "../store/slices/snackbarSlice";
 
 function stringToColor(string) {
   let hash = 0;
@@ -71,7 +74,28 @@ const LobbyBody = () => {
     mutationFn: async (_id) => {
       return await $axios.post(`/lobby/addUser/${_id}`);
     },
-    onSuccess: (res) => {
+    onSuccess: (response) => {
+      dispatch(openSuccessSnackbar(response?.data?.message));
+
+      queryClient.invalidateQueries("get-recruit-list");
+    },
+    onError: (error) => {
+      dispatch(openErrorSnackbar(error?.response?.data?.message));
+    },
+  });
+
+  const {
+    isLoading: removeUserLoading,
+    isError: removeUserError,
+    mutate: removeUser,
+  } = useMutation({
+    mutationKey: ["leave-user-from-lobby"],
+    mutationFn: async (_id) => {
+      return await $axios.post(`/lobby/removeUser/${_id}`);
+    },
+    onSuccess: (response) => {
+      dispatch(openSuccessSnackbar(response?.data?.message));
+
       queryClient.invalidateQueries("get-recruit-list");
     },
     onError: (error) => {
@@ -85,7 +109,7 @@ const LobbyBody = () => {
     return <NoRecruit />;
   }
 
-  if (isLoading || addUserLoading) {
+  if (isLoading || addUserLoading || removeUserLoading) {
     return <Loader />;
   }
   return (
@@ -171,9 +195,15 @@ const LobbyBody = () => {
                 >
                   Join
                 </Button>
-                {/* <Button variant="contained" color="error">
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={() => {
+                    removeUser(item._id);
+                  }}
+                >
                   Leave
-                </Button> */}
+                </Button>
               </Stack>
             </>
           );

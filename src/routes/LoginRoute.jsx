@@ -1,4 +1,5 @@
 import AuthGuard from "../Guards/AuthGuard";
+import CategoryList from "../components/CategoryList";
 import EditProduct from "../components/EditProduct";
 import LobbyDetail from "../components/LobbyDetail";
 import Recruit from "../components/Recruit";
@@ -85,6 +86,10 @@ const LoginRoute = [
       {
         path: "terms",
         element: <Terms />,
+      },
+      {
+        path: "category/list/:id",
+        element: <CategoryList />,
       },
     ],
   },

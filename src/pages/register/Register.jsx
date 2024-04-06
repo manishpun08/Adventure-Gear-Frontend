@@ -154,7 +154,7 @@ const Register = () => {
                       background: "black",
                       borderRadius: "50%",
                     }}
-                    src="/public/img/TreakLogo.png"
+                    src="/img/TreakLogo.png"
                     alt=""
                   />
                 </Box>

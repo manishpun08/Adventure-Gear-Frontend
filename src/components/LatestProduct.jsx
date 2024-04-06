@@ -65,6 +65,7 @@ const LatestProduct = (props) => {
       return await $axios.get("/product/list/latest");
     },
   });
+
   // data fetching
   const latestProducts = data?.data?.latestProducts;
   //  if loading show loader
@@ -88,7 +89,7 @@ const LatestProduct = (props) => {
                     margin: "1rem 0",
                     maxWidth: 270,
                     maxHeight: 350,
-                    width: { xs: "100%", md: "23.9%", sm: "40%" },
+                    width: { xs: "100%", md: "23.9%", sm: "100%" },
                     boxShadow:
                       "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;",
                   }}
@@ -101,7 +102,7 @@ const LatestProduct = (props) => {
                     src={item.image || fallbackImage}
                     style={{
                       width: "100%",
-                      height: "200px",
+                      height: "150px",
                       objectFit: "cover",
                       marginTop: "7px",
                       cursor: "pointer",
@@ -134,6 +135,7 @@ const LatestProduct = (props) => {
                     <Button
                       variant="contained"
                       fullWidth
+                      color="success"
                       onClick={() => {
                         navigate(`/productDetails/${item._id}`);
                       }}
