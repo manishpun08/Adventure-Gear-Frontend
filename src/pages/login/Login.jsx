@@ -45,6 +45,8 @@ const Login = () => {
       localStorage.setItem("firstName", response?.data?.user?.firstName);
       localStorage.setItem("lastName", response?.data?.user?.lastName);
       localStorage.setItem("userId", response?.data?.user?._id);
+      localStorage.setItem("image", response?.data?.user?.image);
+
       navigate("/home");
       dispatch(openSuccessSnackbar(response?.data?.message));
     },

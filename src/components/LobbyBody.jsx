@@ -1,7 +1,7 @@
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import React from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { userProfileBackup } from "../constant/general.constant";
 import $axios from "../lib/axios.instance";
@@ -47,9 +47,11 @@ function stringAvatar(name) {
   };
 }
 
-const fullName = getFullName();
+// const fullName = getFullName();
 
 const LobbyBody = () => {
+  const [joined, setJoined] = useState(false);
+
   const dispatch = useDispatch();
 
   const queryClient = useQueryClient();
@@ -122,7 +124,7 @@ const LobbyBody = () => {
                 direction="row"
                 mt={2}
                 mb={2}
-                justifyContent="space-between"
+                justifyContent={{ md: "space-between" }}
               >
                 <Typography variant="h5" fontWeight="600">
                   Trip to {item?.destination}{" "}
@@ -132,7 +134,11 @@ const LobbyBody = () => {
                     ({item?.adventure})
                   </span>
                 </Typography>
-                <Typography variant="h5" fontWeight="600" paddingRight={25}>
+                <Typography
+                  variant="h5"
+                  fontWeight="600"
+                  paddingRight={{ md: 25 }}
+                >
                   Expires {dayjs(item?.lobbyExpireAt).fromNow()}
                 </Typography>
               </Stack>
@@ -148,16 +154,29 @@ const LobbyBody = () => {
                   return (
                     <Box
                       key={user._id}
-                      height={160}
-                      width={160}
+                      height={{ md: 160, xs: 100 }}
+                      width={{ md: 160, xs: 100 }}
                       display="flex"
                       alignItems="center"
                       p={2}
                       sx={{ border: "1px solid #ddd" }}
                     >
-                      <Avatar
-                        {...stringAvatar(`${user.firstName} ${user.lastName}`)}
-                      />
+                      {user.image && (
+                        <img
+                          width={100}
+                          style={{ width: "100%", borderRadius: "50%" }}
+                          src={user.image}
+                          alt=""
+                        />
+                      )}
+
+                      {!user.image && (
+                        <Avatar
+                          {...stringAvatar(
+                            `${user.firstName} ${user.lastName}`
+                          )}
+                        />
+                      )}
                     </Box>
                   );
                 })}
@@ -185,25 +204,30 @@ const LobbyBody = () => {
                   })}
 
                 <LobbyDetail {...item} />
-
-                <Button
-                  variant="contained"
-                  color="warning"
-                  onClick={() => {
-                    mutate(item._id);
-                  }}
-                >
-                  Join
-                </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => {
-                    removeUser(item._id);
-                  }}
-                >
-                  Leave
-                </Button>
+                {!joined && (
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    onClick={() => {
+                      mutate(item._id);
+                      setJoined(true);
+                    }}
+                  >
+                    Join
+                  </Button>
+                )}
+                {joined && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      removeUser(item._id);
+                      setJoined(false);
+                    }}
+                  >
+                    Leave
+                  </Button>
+                )}
               </Stack>
             </>
           );

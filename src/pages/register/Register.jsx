@@ -35,9 +35,6 @@ const Register = () => {
   // using redux for snackbar
   const dispatch = useDispatch();
 
-  // Calculate min date
-  const minDate = dayjs();
-
   // hide and show password
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -278,12 +275,6 @@ const Register = () => {
                     sx={{ width: "100%" }}
                     label="DOB"
                     disableFuture
-                    minDate={minDate} // Set minimum date
-                    value={
-                      formik.values.dob
-                        ? dayjs(formik.values.dob, "DD/MM/YYYY")
-                        : null
-                    } // Convert dob value to Date object
                     onChange={(date) => {
                       formik.setFieldValue(
                         "dob",

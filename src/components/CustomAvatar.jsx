@@ -44,13 +44,25 @@ function stringAvatar(name) {
 
 const settings = [
   {
-    id: 1,
     name: "Profile",
-    path: "/profile",
   },
 ];
 
 const CustomAvatar = () => {
+  const userId = localStorage.getItem("userId");
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
+  const image = localStorage.getItem("image");
+
+  // const avatarName = localStorage.getItem("avatarName");
+
+  // const renderAvatar = () => {
+  //   const image = localStorage.getItem("image");
+  //   if (image) {
+  //     return <Avatar src={image} />;
+  //   }
+  // };
+
   const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -65,8 +77,13 @@ const CustomAvatar = () => {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-        {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-        <Avatar {...stringAvatar(fullName)} />
+        <Box>
+          {image === "image" ? (
+            <Avatar {...stringAvatar(`${firstName} ${lastName}`)} />
+          ) : (
+            <Avatar src={image} />
+          )}
+        </Box>
       </IconButton>
       <Menu
         sx={{ mt: "45px" }}
@@ -94,7 +111,7 @@ const CustomAvatar = () => {
               key={setting.id}
               sx={{ color: "#000" }}
               onClick={() => {
-                navigate(setting.path);
+                navigate(`userProfile/get/${userId}`);
               }}
             >
               {setting.name}

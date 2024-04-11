@@ -80,7 +80,7 @@ const LoginRoute = [
         element: <FAQ />,
       },
       {
-        path: "profile",
+        path: "userProfile/get/:id",
         element: <Profile />,
       },
       {
