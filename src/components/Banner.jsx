@@ -32,14 +32,8 @@ const Banner = () => {
                 </Typography>
               </Stack>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              lg={6}
-              alignItems="right"
-              alignContent="right"
-              justifyContent="flex-end"
-            >
+
+            <Grid item xs={12} lg={6} display="flex" justifyContent="flex-end">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.361352252173!2d85.33182811279417!3d27.70612726003992!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a00bd8d7c1%3A0xe01225b704668023!2sLord%20Buddha%20Education%20Foundation-%20LBEF%20CAMPUS%20(The%20First%20IT%20College%20of%20Nepal)!5e0!3m2!1sen!2snp!4v1711294369184!5m2!1sen!2snp"
                 width="400"

@@ -159,7 +159,7 @@ const Header = (props) => {
             </Grid>
 
             {/* search bar  */}
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={8}>
               <SearchBar />
               {/* menu bar starts */}
               <Toolbar
@@ -233,7 +233,7 @@ const Header = (props) => {
             </Grid>
 
             {/* login and avatar */}
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={2}>
               <Box
                 sx={{
                   display: "flex",

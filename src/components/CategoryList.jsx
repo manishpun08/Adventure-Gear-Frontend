@@ -50,9 +50,17 @@ const CategoryList = () => {
                 <img
                   src={item.image}
                   alt="Image"
-                  width="100%"
-                  height="200px"
-                  style={{ cursor: "pointer", background: "", padding: "1rem" }}
+                  style={{
+                    cursor: "pointer",
+                    padding: "1rem",
+                    width: "100%",
+                    height: "200px",
+                    objectFit: "cover",
+                    marginTop: "7px",
+                  }}
+                  onClick={() => {
+                    navigate(`/productDetails/${item._id}`);
+                  }}
                 />
                 <Typography
                   gutterBottom
@@ -67,7 +75,7 @@ const CategoryList = () => {
                   }}
                 >
                   {item.name}
-                  <Chip label={item.brand} />
+                  <Chip color="secondary" label={item.brand} />
                 </Typography>
                 <Typography
                   variant="body2"
@@ -81,7 +89,7 @@ const CategoryList = () => {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      navigate(`/product-details/${item._id}`);
+                      navigate(`/productDetails/${item._id}`);
                     }}
                   >
                     Explore

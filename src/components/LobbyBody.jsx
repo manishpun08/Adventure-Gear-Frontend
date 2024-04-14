@@ -86,6 +86,7 @@ const LobbyBody = () => {
     },
   });
 
+  // for removing user to the slot
   const {
     isLoading: removeUserLoading,
     isError: removeUserError,

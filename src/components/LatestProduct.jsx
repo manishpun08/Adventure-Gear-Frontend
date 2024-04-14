@@ -22,42 +22,6 @@ import Loader from "./Loader";
 const LatestProduct = (props) => {
   const navigate = useNavigate();
 
-  const settings = {
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 5000,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
   const { isLoading, data } = useQuery({
     queryKey: ["latest-product"],
     queryFn: async () => {
@@ -67,6 +31,7 @@ const LatestProduct = (props) => {
 
   // data fetching
   const latestProducts = data?.data?.latestProducts;
+
   //  if loading show loader
   if (isLoading) {
     return <Loader />;
@@ -77,79 +42,88 @@ const LatestProduct = (props) => {
         variant="h5"
         textAlign="center"
         fontWeight="800"
-        sx={{ marginTop: "3rem" }}
+        sx={{ marginTop: "2rem" }}
       >
         LATEST PRODUCT
       </Typography>
 
-      <Box>
-        <Slider {...settings}>
-          {latestProducts?.map((item) => {
-            return (
-              <Card
-                key={item._id}
-                sx={{
-                  margin: "1rem 0",
-                  maxWidth: 270,
-                  maxHeight: 350,
-                  width: { xs: "100%", md: "23.9%", sm: "100%" },
-                  boxShadow:
-                    "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;",
+      <Box
+        sx={{
+          display: "flex",
+          gap: "1rem",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        {latestProducts?.map((item) => {
+          return (
+            <Card
+              key={item._id}
+              sx={{
+                width: { xs: "100%", md: "22.9%", sm: "40%" },
+                boxShadow:
+                  "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+              }}
+            >
+              <img
+                onClick={() => {
+                  navigate(`/productDetails/${item._id}`);
                 }}
-              >
-                <img
+                alt={item.name}
+                src={item.image || fallbackImage}
+                style={{
+                  width: "100%",
+                  height: "200px",
+                  objectFit: "cover",
+                  marginTop: "7px",
+                  cursor: "pointer",
+                }}
+              />
+
+              <CardContent>
+                <Typography
+                  gutterBottom
+                  variant="body"
+                  alignItems="center"
+                  sx={{
+                    fontWeight: "700",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {item.name}
+                  <Chip color="secondary" label={item.brand} />
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  textAlign={"justify"}
+                  sx={{ minHeight: "100px" }}
+                >
+                  {item.description.trim()}....
+                </Typography>
+                <Stack direction="row" justifyContent="space-between">
+                  <Typography fontWeight="600">${item.price}</Typography>
+                  <Chip label="5% OFF" />
+                </Stack>
+              </CardContent>
+
+              <CardActions>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  color="success"
                   onClick={() => {
                     navigate(`/productDetails/${item._id}`);
                   }}
-                  alt={props.name}
-                  src={item.image || fallbackImage}
-                  style={{
-                    width: "100%",
-                    height: "150px",
-                    objectFit: "cover",
-                    marginTop: "7px",
-                    cursor: "pointer",
-                  }}
-                />
-
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="body"
-                    alignItems="center"
-                    sx={{
-                      fontWeight: "700",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    {item.name}
-                    <Chip label={item.brand} />
-                  </Typography>
-
-                  <Stack direction="row" justifyContent="space-between">
-                    <Typography fontWeight="600">${item.price}</Typography>
-
-                    <Typography fontWeight="600">5% OFF</Typography>
-                  </Stack>
-                </CardContent>
-
-                <CardActions>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    color="success"
-                    onClick={() => {
-                      navigate(`/productDetails/${item._id}`);
-                    }}
-                  >
-                    Explore
-                  </Button>
-                </CardActions>
-              </Card>
-            );
-          })}
-        </Slider>
+                >
+                  Explore
+                </Button>
+              </CardActions>
+            </Card>
+          );
+        })}
       </Box>
     </>
   );

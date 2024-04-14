@@ -29,15 +29,14 @@ const Footer = () => {
         <Box className="footer-top">
           <Container maxWidth="lg">
             <Grid container>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={3}>
                 <img
-                  style={{ width: "90px" }}
-                  className="logo"
+                  style={{ width: "90px", alignItems: "left" }}
                   src="/img/TreakLogo.png"
                   alt="logo"
                 />
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={3}>
                 <ListItem>
                   <Link to="contact">
                     <Typography sx={{ color: "#fff" }} fontSize="18px">
@@ -51,7 +50,8 @@ const Footer = () => {
                     <Typography sx={{ color: "#fff" }}>About Us</Typography>
                   </Link>
                 </ListItem>
-
+              </Grid>
+              <Grid item xs={12} md={3}>
                 <ListItem>
                   <Link to="faq">
                     <Typography sx={{ color: "#fff" }}>FAQ</Typography>
@@ -66,12 +66,11 @@ const Footer = () => {
                   </Link>
                 </ListItem>
               </Grid>
-
               <Grid
                 container
                 item
                 xs={12}
-                md={4}
+                md={3}
                 spacing={2}
                 alignItems="center"
                 color="#fff"
