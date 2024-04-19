@@ -63,8 +63,6 @@ function a11yProps(index) {
 const ProductDescription = (props) => {
   const dispatch = useDispatch();
 
-  console.log(props);
-
   const queryClient = useQueryClient();
 
   const navigate = useNavigate();
@@ -220,7 +218,7 @@ const ProductDescription = (props) => {
         </Stack>
         <Stack direction="row" alignItems="center" mt="1rem" spacing={1}>
           <Typography> Price:</Typography>
-          <Typography>{props.price}</Typography>
+          <Typography>Rs.{props.price}</Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
           <Typography> Free Shipping:</Typography>

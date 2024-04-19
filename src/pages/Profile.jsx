@@ -16,7 +16,7 @@ import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import * as Yup from "yup";
@@ -59,7 +59,6 @@ const Profile = () => {
   });
 
   const user = data?.data?.user;
-  // console.log(user);
 
   // mutate api
   const { isLoading: editLoading, mutate } = useMutation({
@@ -76,9 +75,9 @@ const Profile = () => {
     },
   });
 
-  // if (isLoading || imageLoading) {
-  //   return <Loader />;
-  // }
+  if (isLoading || imageLoading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -98,7 +97,7 @@ const Profile = () => {
             lastName: user?.lastName || "",
             email: user?.email || "",
 
-            gender: user?.gender || null,
+            gender: user?.gender || "",
             // dob: user?.dob || null,
           }}
           validationSchema={Yup.object({
@@ -204,7 +203,7 @@ const Profile = () => {
               <Stack direction="row" spacing={2}>
                 <FormControl>
                   <TextField
-                    label="firstName"
+                    label="First Name"
                     {...getFieldProps("firstName")}
                   />
                   {touched.firstName && errors.firstName ? (
@@ -213,7 +212,7 @@ const Profile = () => {
                 </FormControl>
 
                 <FormControl>
-                  <TextField label="lastName" {...getFieldProps("lastName")} />
+                  <TextField label="Last Name" {...getFieldProps("lastName")} />
                   {touched.lastName && errors.lastName ? (
                     <FormHelperText error>{errors.lastName}</FormHelperText>
                   ) : null}

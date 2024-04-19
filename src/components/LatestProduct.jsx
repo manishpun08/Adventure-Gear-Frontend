@@ -104,7 +104,7 @@ const LatestProduct = (props) => {
                   {item.description.trim()}....
                 </Typography>
                 <Stack direction="row" justifyContent="space-between">
-                  <Typography fontWeight="600">${item.price}</Typography>
+                  <Typography fontWeight="600">Rs.{item.price}</Typography>
                   <Chip label="5% OFF" />
                 </Stack>
               </CardContent>

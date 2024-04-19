@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { Box, Typography } from "@mui/material";
+import dayjs from "dayjs";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -20,6 +21,7 @@ const LobbyDetail = ({
   image,
   description,
 }) => {
+  const meetingDate = dayjs(date).format("MMMM DD, YYYY");
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -71,7 +73,8 @@ const LobbyDetail = ({
             </Typography>
 
             <Typography>
-              Date: <span style={{ fontWeight: "600" }}> {date}</span>
+              Meeting Date:
+              <span style={{ fontWeight: "600" }}> {meetingDate}</span>
             </Typography>
           </Box>
         </DialogContent>
