@@ -312,8 +312,8 @@ const LobbyBody = () => {
                   return (
                     <Box
                       key={user._id}
-                      height={{ md: 160, xs: 100 }}
-                      width={{ md: 160, xs: 100 }}
+                      height={{ md: 160, sm: 140 }}
+                      width={{ md: 160, sm: 140 }}
                       display="flex"
                       alignItems="center"
                       p={2}
@@ -321,8 +321,10 @@ const LobbyBody = () => {
                     >
                       {user.image && (
                         <img
-                          width={100}
-                          style={{ width: "100%", borderRadius: "50%" }}
+                          style={{
+                            width: "100%",
+                            borderRadius: "50%",
+                          }}
                           src={user.image}
                           alt=""
                         />
@@ -346,17 +348,23 @@ const LobbyBody = () => {
                     return (
                       <Box
                         key={index}
-                        height={160}
-                        width={160}
                         display="flex"
                         alignItems="center"
                         p={2}
-                        sx={{ border: "1px solid #ddd" }}
+                        sx={{
+                          border: "1px solid #ddd",
+                          height: { md: "160px", sm: "100px" },
+                          width: { md: "160px", sm: "100px" },
+                        }}
                       >
                         <img
-                          style={{ width: "100%" }}
+                          style={{ width: "100%", cursor: "pointer" }}
                           src={userProfileBackup}
                           alt=""
+                          onClick={() => {
+                            mutate(item._id);
+                            toggleJoinStatus(item._id);
+                          }}
                         />
                       </Box>
                     );

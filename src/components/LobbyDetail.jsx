@@ -69,7 +69,14 @@ const LobbyDetail = ({
             </Typography>
             <Typography>
               Contact Number:
-              <span style={{ fontWeight: "600" }}> {contactNumber}</span>
+              <span style={{ fontWeight: "600" }}>
+                <a
+                  href={`tel:${contactNumber}`}
+                  style={{ color: "black", textDecoration: "underline" }}
+                >
+                  {contactNumber}
+                </a>
+              </span>
             </Typography>
 
             <Typography>

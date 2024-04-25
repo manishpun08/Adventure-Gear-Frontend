@@ -278,7 +278,7 @@ const Register = () => {
                     onChange={(date) => {
                       formik.setFieldValue(
                         "dob",
-                        dayjs(date).format("DD/MM/YYYY")
+                        dayjs(date).format("YYYY-MM-DD") // Format as YYYY-MM-DD
                       );
                     }}
                     renderInput={(params) => <TextField {...params} />}
