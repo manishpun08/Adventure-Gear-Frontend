@@ -6,9 +6,10 @@ import axios from "axios";
 // });
 
 const $axios = axios.create({
-  baseURL: "https://long-tan-snapper-tutu.cyclic.app/",
+  baseURL: "https://adven-gear-backend.onrender.com/",
   timeout: 5000,
 });
+
 
 // Add a request interceptor
 $axios.interceptors.request.use(function (config) {
