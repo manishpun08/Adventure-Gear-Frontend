@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const $axios = axios.create({
-  baseURL: "http://localhost:8000",
-  timeout: 5000,
-});
-
 // const $axios = axios.create({
-//   baseURL: "https://adven-gear-backend.onrender.com/",
+//   baseURL: "http://localhost:8000",
 //   timeout: 5000,
 // });
+
+const $axios = axios.create({
+  baseURL: "https://adven-gear-backend.onrender.com/",
+  timeout: 5000,
+});
 
 // Add a request interceptor
 $axios.interceptors.request.use(function (config) {
