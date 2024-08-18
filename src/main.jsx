@@ -13,6 +13,7 @@ const queryClient = new QueryClient();
 
 // creating application routes
 const router = createBrowserRouter(applicationRoutes);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
